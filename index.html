@@ -73,16 +73,17 @@ body {
 </div>
 
 <!-- ================= THEATER VIEW ================= -->
-<div id="theater-view" class="hidden w-full h-[100dvh] bg-black relative overflow-hidden">
+<div id="theater-view" class="hidden fixed inset-0 w-screen h-screen bg-black overflow-hidden">
 
   <!-- VIDEO -->
-  <video
-    id="main-video"
-    src="https://www.dropbox.com/scl/fi/0k0b2rltlppcyhqhgz3hi/A-Birthday-To-Remember.mp4?rlkey=xb4t2kxp5hkc7xumtbt9l3avd&st=g5om3zwo&raw=1"
-    class="absolute inset-0 w-full h-full object-cover"
-    playsinline
-    muted>
-  </video>
+<video
+  id="main-video"
+  src="https://www.dropbox.com/scl/fi/0k0b2rltlppcyhqhgz3hi/A-Birthday-To-Remember.mp4?rlkey=xb4t2kxp5hkc7xumtbt9l3avd&st=g5om3zwo&raw=1"
+  class="absolute inset-0 w-full h-full object-cover"
+  playsinline
+  muted
+  autoplay>
+</video>
 
   <!-- CURTAINS -->
   <div id="left-curtain" class="absolute top-0 left-0 w-1/2 h-full bg-red-900 z-20"></div>
