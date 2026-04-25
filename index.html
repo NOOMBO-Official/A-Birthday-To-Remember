@@ -15,7 +15,7 @@ body {
   background-color: #000;
 }
 
-/* Curtain animation */
+/* Curtains */
 .curtain-open-left {
   transform: translateX(-100%);
 }
@@ -26,113 +26,91 @@ body {
 #left-curtain, #right-curtain {
   transition: transform 3s ease-in-out;
 }
-
-.transform-style-preserve-3d {
-  transform-style: preserve-3d;
-}
 </style>
 </head>
 
 <body>
 
 <!-- ================= TICKET VIEW ================= -->
-<!-- ================= TICKET VIEW (FIXED UI) ================= -->
+<div id="ticket-view" class="fixed inset-0 w-full h-[100dvh] bg-black text-white font-sans flex flex-col items-center justify-between py-10 px-6 z-50">
 
-<!-- CAMERA -->
-<video id="camera-feed" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover opacity-0"></video>
-
-<!-- MAIN UI -->
-<div class="relative z-10 w-full h-full flex flex-col items-center justify-between py-6 px-4">
-
-  <h1 class="text-white text-xl">Scan Ticket</h1>
-
-  <div class="w-[220px] h-[220px] border-2 border-white rounded-3xl flex items-center justify-center">
-    <i data-lucide="barcode" class="text-white w-16 h-16"></i>
-  </div>
-<div id="ticket-view" class="fixed inset-0 w-full h-[100dvh] bg-black overflow-hidden font-sans z-50 flex flex-col items-center justify-between">
-
-  <!-- Background glow -->
+  <!-- Background -->
   <div class="absolute inset-0 bg-gradient-to-b from-zinc-900 via-black to-black"></div>
 
   <!-- Header -->
-  <div class="relative z-10 flex flex-col items-center mt-10 space-y-3">
-    <div class="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center">
-      <i data-lucide="camera" class="w-6 h-6 text-white"></i>
-    </div>
-
-    <h1 class="text-white text-xl font-medium tracking-wide">Scan Ticket</h1>
-    <p class="text-white/50 text-xs text-center">Position barcode within frame</p>
+  <div class="relative z-10 text-center space-y-2">
+    <i data-lucide="camera" class="w-10 h-10 mx-auto"></i>
+    <h1 class="text-xl font-medium">Scan Ticket</h1>
+    <p class="text-white/50 text-xs">Enter your VIP access code</p>
   </div>
 
-  <!-- Scanner Frame -->
-  <div class="relative z-10 w-[240px] h-[240px] flex items-center justify-center">
-
-    <div class="absolute inset-0 border-2 border-white/30 rounded-3xl"></div>
-
-    <i data-lucide="barcode" class="w-20 h-20 text-white/30"></i>
-
+  <!-- Scanner -->
+  <div class="relative z-10 w-[240px] h-[240px] border border-white/20 rounded-3xl flex items-center justify-center">
+    <i data-lucide="barcode" class="w-16 h-16 text-white/30"></i>
   </div>
 
-  <!-- Input Card -->
-  <div class="relative z-10 w-full px-6 pb-10">
+  <!-- Input -->
+  <form id="auth-form" class="relative z-10 w-full max-w-sm space-y-3">
 
-    <form id="auth-form" class="w-full max-w-sm mx-auto space-y-3">
+    <input
+      id="code-input"
+      type="text"
+      placeholder="ENTER CODE"
+      class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-center tracking-[0.25em] uppercase text-white focus:outline-none focus:ring-2 focus:ring-white/30"
+    />
 
-      <input
-        id="code-input"
-        type="text"
-        placeholder="ENTER CODE MANUALLY"
-        class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 text-center text-white tracking-[0.25em] uppercase focus:outline-none focus:ring-2 focus:ring-white/30"
-      />
+    <button
+      id="auth-btn"
+      type="submit"
+      disabled
+      class="w-full py-4 rounded-2xl bg-white/10 text-white/40 font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+    >
+      Authenticate
+    </button>
 
-      <button
-        id="auth-btn"
-        type="submit"
-        disabled
-        class="w-full py-4 rounded-2xl bg-white/10 text-white/40 font-medium tracking-wide transition disabled:opacity-40 disabled:cursor-not-allowed"
-      >
-        Authenticate
-      </button>
+  </form>
 
-    </form>
+</div>
 
 <!-- ================= THEATER VIEW ================= -->
 <div id="theater-view" class="hidden w-full h-[100dvh] bg-black relative overflow-hidden">
 
-<!-- VIDEO -->
-<video id="main-video"
-src="https://www.dropbox.com/scl/fi/0k0b2rltlppcyhqhgz3hi/A-Birthday-To-Remember.mp4?rlkey=xb4t2kxp5hkc7xumtbt9l3avd&st=g5om3zwo&raw=1"
-class="absolute inset-0 w-full h-full object-cover"
-playsinline muted></video>
+  <!-- VIDEO -->
+  <video
+    id="main-video"
+    src="https://www.dropbox.com/scl/fi/0k0b2rltlppcyhqhgz3hi/A-Birthday-To-Remember.mp4?rlkey=xb4t2kxp5hkc7xumtbt9l3avd&st=g5om3zwo&raw=1"
+    class="absolute inset-0 w-full h-full object-cover"
+    playsinline
+    muted>
+  </video>
 
-<!-- CURTAINS -->
-<div id="left-curtain" class="absolute top-0 left-0 w-1/2 h-full bg-red-900 z-20"></div>
-<div id="right-curtain" class="absolute top-0 right-0 w-1/2 h-full bg-red-900 z-20"></div>
+  <!-- CURTAINS -->
+  <div id="left-curtain" class="absolute top-0 left-0 w-1/2 h-full bg-red-900 z-20"></div>
+  <div id="right-curtain" class="absolute top-0 right-0 w-1/2 h-full bg-red-900 z-20"></div>
 
 </div>
 
 <script>
 lucide.createIcons();
 
-/* ---------------- CAMERA ---------------- */
+/* CAMERA */
 async function startCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-    document.getElementById("camera-feed").srcObject = stream;
   } catch (e) {
     console.log("Camera blocked");
   }
 }
 startCamera();
 
-/* ---------------- VIP SYSTEM ---------------- */
+/* VIP CODES */
 const VALID_CODES = ["VIP-LH18", "VIP-GUEST", "VIP-STAFF"];
 
 function validate(code) {
   return VALID_CODES.includes(code);
 }
 
-/* ---------------- INPUT LOGIC ---------------- */
+/* INPUT HANDLING */
 const input = document.getElementById("code-input");
 const btn = document.getElementById("auth-btn");
 
@@ -141,26 +119,26 @@ input.addEventListener("input", e => {
   btn.disabled = e.target.value.length < 5;
 });
 
-/* ---------------- THEATER START ---------------- */
+/* THEATER START */
+const ticketView = document.getElementById("ticket-view");
+const theaterView = document.getElementById("theater-view");
 const leftCurtain = document.getElementById("left-curtain");
 const rightCurtain = document.getElementById("right-curtain");
 const video = document.getElementById("main-video");
 
 function startTheater() {
-  document.getElementById("ticket-view").classList.add("hidden");
-  document.getElementById("theater-view").classList.remove("hidden");
+  ticketView.classList.add("hidden");
+  theaterView.classList.remove("hidden");
 
-  // play video
   video.play().catch(() => {});
 
-  // open curtains
   setTimeout(() => {
     leftCurtain.classList.add("curtain-open-left");
     rightCurtain.classList.add("curtain-open-right");
   }, 800);
 }
 
-/* ---------------- FORM SUBMIT ---------------- */
+/* FORM SUBMIT */
 document.getElementById("auth-form").addEventListener("submit", e => {
   e.preventDefault();
 
